@@ -107,7 +107,7 @@ ros2 param set /person_info_param_publisher default_age 28
 ### 6.1 为什么出现退出码 254
 
 多数是手动 Ctrl+C 中断节点引起，不是代码错误。
-
+1
 ### 6.2 为什么改了 setup.py 还找不到新命令
 
 通常是没有重新 build，或运行前没有 source install/setup.bash。
