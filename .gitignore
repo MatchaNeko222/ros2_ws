@@ -1,0 +1,8 @@
+# ROS2 workspace generated artifacts
+MY_NEW_WS/build/
+MY_NEW_WS/install/
+MY_NEW_WS/log/
+
+# Python cache files
+**/__pycache__/
+**/*.pyc
