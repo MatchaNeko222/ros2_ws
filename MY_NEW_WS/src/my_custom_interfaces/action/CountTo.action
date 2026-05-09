@@ -1,0 +1,9 @@
+# Goal
+int32 target
+---
+# Result
+bool success
+int32 final_count
+---
+# Feedback
+int32 current_count

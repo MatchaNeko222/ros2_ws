@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: demo_takeoff_flight_land
+Version: 0.0.1
+Summary: Takeoff, fly forward 3m, and land using MAVROS in Gazebo.
+Maintainer: user
+Maintainer-email: user@example.com
+License: Apache-2.0
+Requires-Dist: setuptools
+Dynamic: license
+Dynamic: maintainer
+Dynamic: maintainer-email
+Dynamic: requires-dist
+Dynamic: summary

@@ -6,6 +6,8 @@ find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/PersonInfo.msg"
+  "action/CountTo.action"
+  "action/Fibonacci.action"
 )
 
 ament_package()

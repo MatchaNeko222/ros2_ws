@@ -35,6 +35,12 @@ setup(
             "person_info_publisher = my_test_pkg.person_info_publisher:main",
             "person_info_subscriber = my_test_pkg.person_info_subscriber:main",
             "person_info_param_publisher = my_test_pkg.person_info_param_publisher:main",
+            "fibonacci_action_server = my_test_pkg.fibonacci_action_server:main",
+            "fibonacci_action_client = my_test_pkg.fibonacci_action_client:main",
+            "multi_node_demo = my_test_pkg.multi_node_demo:main",
+            "param_event_handler_demo = my_test_pkg.param_event_handler_demo:main",
+            "param_publisher = my_test_pkg.param_publisher:main",
+            "param_listener = my_test_pkg.param_listener:main",
         ],
     },
 )

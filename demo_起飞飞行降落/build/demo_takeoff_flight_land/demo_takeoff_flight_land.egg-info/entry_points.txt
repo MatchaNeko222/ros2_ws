@@ -1,0 +1,2 @@
+[console_scripts]
+mission_node = demo_takeoff_flight_land.mission_node:main
