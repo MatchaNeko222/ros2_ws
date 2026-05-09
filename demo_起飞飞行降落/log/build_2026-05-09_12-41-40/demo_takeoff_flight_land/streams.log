@@ -1,0 +1,31 @@
+[0.544s] Invoking command in '/home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落/demo_takeoff_flight_land': PYTHONPATH=/home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落/build/demo_takeoff_flight_land/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落/install/demo_takeoff_flight_land/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/demo_takeoff_flight_land build --build-base /home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落/build/demo_takeoff_flight_land/build install --record /home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落/build/demo_takeoff_flight_land/install.log --single-version-externally-managed install_data
+[0.675s] /home/luckiop/.local/lib/python3.10/site-packages/setuptools/_distutils/dist.py:287: UserWarning: Unknown distribution option: 'tests_require'
+[0.675s]   warnings.warn(msg)
+[0.744s] running egg_info
+[0.754s] writing ../build/demo_takeoff_flight_land/demo_takeoff_flight_land.egg-info/PKG-INFO
+[0.755s] writing dependency_links to ../build/demo_takeoff_flight_land/demo_takeoff_flight_land.egg-info/dependency_links.txt
+[0.755s] writing entry points to ../build/demo_takeoff_flight_land/demo_takeoff_flight_land.egg-info/entry_points.txt
+[0.755s] writing requirements to ../build/demo_takeoff_flight_land/demo_takeoff_flight_land.egg-info/requires.txt
+[0.755s] writing top-level names to ../build/demo_takeoff_flight_land/demo_takeoff_flight_land.egg-info/top_level.txt
+[0.780s] reading manifest file '../build/demo_takeoff_flight_land/demo_takeoff_flight_land.egg-info/SOURCES.txt'
+[0.781s] writing manifest file '../build/demo_takeoff_flight_land/demo_takeoff_flight_land.egg-info/SOURCES.txt'
+[0.781s] running build
+[0.781s] running build_py
+[0.781s] copying demo_takeoff_flight_land/mission_node.py -> /home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落/build/demo_takeoff_flight_land/build/lib/demo_takeoff_flight_land
+[0.782s] copying demo_takeoff_flight_land/__init__.py -> /home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落/build/demo_takeoff_flight_land/build/lib/demo_takeoff_flight_land
+[0.782s] copying demo_takeoff_flight_land/py.typed -> /home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落/build/demo_takeoff_flight_land/build/lib/demo_takeoff_flight_land
+[0.782s] running install
+[0.785s] running install_lib
+[0.796s] copying /home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落/build/demo_takeoff_flight_land/build/lib/demo_takeoff_flight_land/mission_node.py -> /home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落/install/demo_takeoff_flight_land/lib/python3.10/site-packages/demo_takeoff_flight_land
+[0.797s] byte-compiling /home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落/install/demo_takeoff_flight_land/lib/python3.10/site-packages/demo_takeoff_flight_land/mission_node.py to mission_node.cpython-310.pyc
+[0.798s] running install_data
+[0.799s] copying resource/demo_takeoff_flight_land -> /home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落/install/demo_takeoff_flight_land/share/ament_index/resource_index/packages
+[0.799s] copying package.xml -> /home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落/install/demo_takeoff_flight_land/share/demo_takeoff_flight_land
+[0.799s] copying launch/mission.launch.py -> /home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落/install/demo_takeoff_flight_land/share/demo_takeoff_flight_land/launch
+[0.799s] running install_egg_info
+[0.810s] removing '/home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落/install/demo_takeoff_flight_land/lib/python3.10/site-packages/demo_takeoff_flight_land-0.0.1-py3.10.egg-info' (and everything under it)
+[0.811s] Copying ../build/demo_takeoff_flight_land/demo_takeoff_flight_land.egg-info to /home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落/install/demo_takeoff_flight_land/lib/python3.10/site-packages/demo_takeoff_flight_land-0.0.1-py3.10.egg-info
+[0.812s] running install_scripts
+[0.836s] Installing mission_node script to /home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落/install/demo_takeoff_flight_land/lib/demo_takeoff_flight_land
+[0.836s] writing list of installed files to '/home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落/build/demo_takeoff_flight_land/install.log'
+[0.866s] Invoked command in '/home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落/demo_takeoff_flight_land' returned '0': PYTHONPATH=/home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落/build/demo_takeoff_flight_land/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落/install/demo_takeoff_flight_land/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/demo_takeoff_flight_land build --build-base /home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落/build/demo_takeoff_flight_land/build install --record /home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落/build/demo_takeoff_flight_land/install.log --single-version-externally-managed install_data

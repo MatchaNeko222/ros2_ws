@@ -11,7 +11,8 @@
 ## 编译
 
 ```bash
-cd /home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落
+DEMO_LEARN_WS=/home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落
+cd "$DEMO_LEARN_WS"
 source /opt/ros/humble/setup.bash
 colcon build --packages-select demo_takeoff_flight_land
 source install/setup.bash
@@ -19,17 +20,33 @@ source install/setup.bash
 
 ## 运行
 
+## 进展
+
+- 任务节点可启动，能持续发送 setpoint。
+- 起飞可达目标高度（z≈3.0），但前进阶段在部分环境中受飞控 failsafe/检查限制影响。
+- 已移除 bringup 中的 `simple_mission_node` 以避免任务冲突。
+
+## 完整验证流程（含清理）
+
+终端 0（清理旧进程）：
+
+```bash
+pkill -f "simple_mission_node|sim_vehicle.py|arducopter|gz sim|mavros_node|ros2 launch demo_drone_bringup" || true
+```
+
 终端 1（SITL + Gazebo）：
 
 ```bash
-cd /home/luckiop/IDEA_development_ws/demo_in_gazebo
+DEMO_GZ_WS=/home/luckiop/IDEA_development_ws/demo_in_gazebo
+cd "$DEMO_GZ_WS"
 bash scripts/start_sitl_gazebo.sh
 ```
 
 终端 2（bringup + MAVROS）：
 
 ```bash
-cd /home/luckiop/IDEA_development_ws/demo_in_gazebo
+DEMO_GZ_WS=/home/luckiop/IDEA_development_ws/demo_in_gazebo
+cd "$DEMO_GZ_WS"
 source /opt/ros/humble/setup.bash
 source install/setup.bash
 export ROS_DOMAIN_ID=0
@@ -39,7 +56,8 @@ ros2 launch demo_drone_bringup gazebo_demo.launch.py auto_takeoff:=false
 终端 3（任务节点）：
 
 ```bash
-cd /home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落
+DEMO_LEARN_WS=/home/luckiop/IDEA_learn_ws/ros2_ws/demo_起飞飞行降落
+cd "$DEMO_LEARN_WS"
 source /opt/ros/humble/setup.bash
 source install/setup.bash
 ros2 launch demo_takeoff_flight_land mission.launch.py

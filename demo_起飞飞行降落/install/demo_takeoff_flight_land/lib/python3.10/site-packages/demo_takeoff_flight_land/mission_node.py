@@ -5,6 +5,7 @@ import rclpy
 from geometry_msgs.msg import PoseStamped
 from mavros_msgs.msg import State
 from mavros_msgs.srv import CommandBool, CommandTOL, SetMode
+from rclpy.duration import Duration
 from rclpy.node import Node
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy
 
@@ -24,8 +25,8 @@ class MissionNode(Node):
         self.mode_set = False
         self.takeoff_sent = False
         self.landing_sent = False
-        self.disarm_sent = False
         self.mission_stage = "INIT"
+        self.takeoff_start_time = None
 
         self.state_sub = self.create_subscription(
             State, "/mavros/state", self.state_cb, 10
@@ -44,7 +45,7 @@ class MissionNode(Node):
         self.takeoff_cli = self.create_client(CommandTOL, "/mavros/cmd/takeoff")
         self.land_cli = self.create_client(CommandTOL, "/mavros/cmd/land")
 
-        self.setpoint_timer = self.create_timer(0.1, self.publish_setpoint)
+        self.setpoint_timer = self.create_timer(0.2, self.publish_setpoint)
         self.mission_timer = self.create_timer(0.5, self.step_mission)
 
         self.get_logger().info("Mission node started")
@@ -71,21 +72,24 @@ class MissionNode(Node):
         if self.mission_stage == "INIT":
             self.mission_stage = "READY"
 
+        if self.mission_stage in {"READY", "TAKEOFF", "FLY", "LAND"}:
+            if self.current_state.mode != "GUIDED":
+                self._set_guided_mode()
+                return
+            if not self.current_state.armed:
+                self._arm_vehicle()
+                return
+
         if self.mission_stage == "READY":
             if self.target_pose is None:
                 self.target_pose = deepcopy(self.current_pose)
             if not self._services_ready():
                 return
-            if self.current_state.mode != "GUIDED":
-                self._set_guided_mode()
-                return
             self.mode_set = True
-            if not self.current_state.armed:
-                self._arm_vehicle()
-                return
             if not self.takeoff_sent:
                 self._takeoff()
                 self.takeoff_sent = True
+                self.takeoff_start_time = self.get_clock().now()
                 self.mission_stage = "TAKEOFF"
                 return
 
@@ -94,10 +98,16 @@ class MissionNode(Node):
                 self.target_pose.pose.position.x = self.current_pose.pose.position.x
                 self.target_pose.pose.position.y = self.current_pose.pose.position.y
                 self.target_pose.pose.position.z = self.takeoff_alt
-            if self.current_pose.pose.position.z >= self.takeoff_alt - 0.3:
+            altitude_reached = self.current_pose.pose.position.z >= self.takeoff_alt - 0.3
+            time_reached = False
+            if self.takeoff_start_time is not None:
+                elapsed = self.get_clock().now() - self.takeoff_start_time
+                time_reached = elapsed >= Duration(seconds=5.0)
+            if altitude_reached or time_reached:
                 self.target_pose = deepcopy(self.current_pose)
                 self.target_pose.pose.position.x += self.forward_dist
                 self.target_pose.pose.position.z = self.takeoff_alt
+                self.get_logger().info("Switching to FLY stage")
                 self.mission_stage = "FLY"
                 return
 
@@ -116,10 +126,6 @@ class MissionNode(Node):
             ):
                 self.mission_stage = "DONE"
 
-        if self.mission_stage == "DONE":
-            if self.current_state.armed and not self.disarm_sent:
-                self._disarm()
-                self.disarm_sent = True
 
     def _services_ready(self) -> bool:
         return (
@@ -139,10 +145,6 @@ class MissionNode(Node):
         req.value = True
         self.arming_cli.call_async(req)
 
-    def _disarm(self) -> None:
-        req = CommandBool.Request()
-        req.value = False
-        self.arming_cli.call_async(req)
 
     def _takeoff(self) -> None:
         req = CommandTOL.Request()
